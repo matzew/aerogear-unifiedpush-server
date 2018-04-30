@@ -16,7 +16,6 @@
  */
 package org.jboss.aerogear.unifiedpush.message.sender.apns;
 
-import io.prometheus.client.Counter;
 import com.turo.pushy.apns.ApnsClient;
 import com.turo.pushy.apns.ApnsClientBuilder;
 import com.turo.pushy.apns.PushNotificationResponse;
@@ -25,6 +24,7 @@ import com.turo.pushy.apns.proxy.Socks5ProxyHandlerFactory;
 import com.turo.pushy.apns.util.ApnsPayloadBuilder;
 import com.turo.pushy.apns.util.SimpleApnsPushNotification;
 import io.netty.util.concurrent.Future;
+import io.prometheus.client.Counter;
 import org.jboss.aerogear.unifiedpush.api.Variant;
 import org.jboss.aerogear.unifiedpush.api.VariantType;
 import org.jboss.aerogear.unifiedpush.api.iOSVariant;
@@ -46,7 +46,6 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import java.io.ByteArrayInputStream;
-import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListSet;
