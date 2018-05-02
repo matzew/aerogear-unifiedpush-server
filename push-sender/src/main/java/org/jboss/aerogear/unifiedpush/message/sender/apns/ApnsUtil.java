@@ -97,6 +97,9 @@ public final class ApnsUtil {
                     if (PUSH_SUBJECTS.contains(matcher.group(1))) {
                         try{
                             certificate.checkValidity();
+                            // We can break here because otherwise we coud end up checking the same certificate
+                            // multiple times
+                            break;
                         } catch (CertificateExpiredException | CertificateNotYetValidException e) {
                             LOGGER.error("Provided APNs .p12 file is expired or not yet valid");
                             return false;
