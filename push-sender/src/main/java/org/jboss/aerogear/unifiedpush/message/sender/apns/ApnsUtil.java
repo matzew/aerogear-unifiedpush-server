@@ -34,8 +34,8 @@ import java.util.regex.Pattern;
 public final class ApnsUtil {
 
     private static final String KEYSTORE_TYPE = "PKCS12";
-    private static final String TOPIC_PATTERN = ".*UID=([^,]+).*";
-    private static final String COMMON_NAME_PATTERN = "CN=(.*?)\\:";
+    private static final Pattern TOPIC_PATTERN = Pattern.compile(".*UID=([^,]+).*");
+    private static final Pattern COMMON_NAME_PATTERN = Pattern.compile("CN=(.*?)\\:");
     private static final List<String> PUSH_SUBJECTS =
             Arrays.asList(
                     "Apple Push Services",
@@ -62,8 +62,7 @@ public final class ApnsUtil {
                 final String subject = subjectX500Principal.getName();
                 if (subject != null ) {
 
-                    final Pattern pattern = Pattern.compile(TOPIC_PATTERN);
-                    final Matcher matcher = pattern.matcher(subject);
+                    final Matcher matcher = TOPIC_PATTERN.matcher(subject);
 
                     if (matcher.matches()) {
                         return matcher.group(1);
@@ -90,8 +89,7 @@ public final class ApnsUtil {
                 final X500Principal subjectX500Principal = certificate.getSubjectX500Principal();
                 final String subject = subjectX500Principal.getName();
 
-                final Pattern pattern = Pattern.compile(COMMON_NAME_PATTERN);
-                final Matcher matcher = pattern.matcher(subject);
+                final Matcher matcher = COMMON_NAME_PATTERN.matcher(subject);
                 while(matcher.find())  {
 
                     // if the CN field contains some Apple Push stuff,
